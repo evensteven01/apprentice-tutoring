@@ -1,27 +1,44 @@
 import React from 'react';
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import routes from './routes';
+
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import MyRoutes from './routes';
+import ScrollToTop from './components/ScrollToTop';
+
+import * as consts from './utils/constants.js';
+
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            //Until redux is introduced, we need to hardcode knowldge of routes here
+            homeState: consts.COLLAPSED,
+            headerState: consts.EXPANDED
+        }   
+    }
+    onChildToggle(childId, childState) {
+        console.log('Toggled by: ' + childId + ' to state: ' + childState);
+        const headerState = childState==consts.EXPANDED ? consts.COLLAPSED : consts.EXPANDED;
+        this.setState({headerState: headerState})
+    }
     render() {
         return (
-            <Router routes={routes}>
+            <Router>
+                <ScrollToTop>
                 <div className="app">
-                    <div className="jumbotron text-center">
-                        <h1>APPRENTICE TUTORING</h1>
-                    </div>
-                    <div className="navbar navbar-expand-sm bg-dark navbar-dark">
-                        <Link className="navbar-brand" to="/">Home</Link>
-                        <Link className="nav-link" to="/About">About</Link>
-                    </div>
-                    <hr />
-                    
-
+                    <Navbar />
+                    <Header componentState={this.state.headerState}/>
+                    <MyRoutes onTogglePageState={this.onChildToggle} />
+                    <Footer />
                 </div>
+                </ScrollToTop>
             </Router>
-            
         );
     }
 }
