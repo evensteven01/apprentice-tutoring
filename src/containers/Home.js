@@ -10,6 +10,7 @@ class Home extends React.Component {
             aboutMeState: consts.COLLAPSED,
             tutoringState: consts.COLLAPSED,
         }
+        this.togglePageState = this.togglePageState.bind(this);
     }
     togglePageState(componentName) {
         console.log('Toggling page state: ' + componentName);
@@ -17,22 +18,28 @@ class Home extends React.Component {
         let tutoringState = 0;
         if(componentName==='aboutMe') {
             aboutMeState = this.state.aboutMeState==consts.COLLAPSED ? consts.EXPANDED : consts.COLLAPSED;
-            this.setState({aboutMeState: aboutMeState});
+            if(aboutMeState==consts.EXPANDED){
+                tutoringState = consts.COLLAPSED;
+            }
+            this.setState();
             const wrapper = document.getElementById('wrapper');
         } else if(componentName==='tutoring') {
             tutoringState = this.state.tutoringState==consts.COLLAPSED ? consts.EXPANDED : consts.COLLAPSED;
-            this.setState({tutoringState: tutoringState});
+            if(tutoringState==consts.EXPANDED){
+                aboutMeState = consts.COLLAPSED;
+            }
         }
+        console.log('New aboutMeState: ' + aboutMeState);
+        console.log('New tutoringState: ' + tutoringState);
+        this.setState({tutoringState: tutoringState, aboutMeState: aboutMeState});
         const homeState = aboutMeState+tutoringState>0 ? consts.EXPANDED : consts.COLLAPSED;
         this.props.onTogglePageState('home', homeState);
     }
     render() {
-        let col1 = null;
-        let col2 = null;
+        let chosenContent = null;
         if(this.state.aboutMeState==consts.EXPANDED) {
-            col1 = (
-                <div>
-                <img className="rounded mx-auto d-block text-center" src={profileImg} />
+            chosenContent = (
+                <div className="boxed-background">
                 <p>Im a Software Engineer with over 10 years of experience in web apps, mobile apps, and TCP/UDP servers.
                     Ive been the sole developer, DB administrator, and linux administrator at a start up as well as started
                     a project leading and managing a team of 7 people. I earned my Masters in Software Engineering. 
@@ -59,9 +66,9 @@ class Home extends React.Component {
                 </div>
             );
         } else if (this.state.tutoringState==consts.EXPANDED) {
-            col2 = (
-                <div>
-                    <h5>Title description, Dec 7, 2017</h5>
+            chosenContent = (
+                <div className="boxed-background">
+                    <h5 className="text-center">Title description, Dec 7, 2017</h5>
                     <div className="fakeimg">Fake Image</div>
                     <p>Some text..</p>
                     <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit,
@@ -81,15 +88,13 @@ class Home extends React.Component {
         return (
             <div className="home-container">
                 <div className="container" style={{marginTop:'30px'}}>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h2 className="text-center" onClick={()=> (this.togglePageState('aboutMe'))}>About Me</h2>
-                            {col1}
-                        </div>
-                        <div className="col-md-6">
-                            <h2 className="text-center" onClick={()=> (this.togglePageState('tutoring'))}>Tutoring</h2>
-                            {col2}
-                        </div>
+                    <div className="row animated-nav-bar pullRightLeft">
+                        <a className="text-center" onClick={()=> (this.togglePageState('aboutMe'))}>About Me</a>
+                        <a className="text-center" onClick={()=> (this.togglePageState('tutoring'))}>Tutoring</a>
+                    </div>
+                    <br />
+                    <div class="main-content">
+                        {chosenContent}
                     </div>
                 </div>
             </div>

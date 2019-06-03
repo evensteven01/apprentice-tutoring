@@ -21,6 +21,7 @@ class App extends React.Component {
             homeState: consts.COLLAPSED,
             headerState: consts.EXPANDED
         }   
+        this.onChildToggle = this.onChildToggle.bind(this);
     }
     onChildToggle(childId, childState) {
         console.log('Toggled by: ' + childId + ' to state: ' + childState);
