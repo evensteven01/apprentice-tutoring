@@ -32,7 +32,7 @@ class App extends React.Component {
         return (
             <Router>
                 <ScrollToTop>
-                <div className="app">
+                <div className="app main-container">
                     <Navbar />
                     <Header componentState={this.state.headerState}/>
                     <MyRoutes onTogglePageState={this.onChildToggle} />

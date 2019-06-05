@@ -6,7 +6,7 @@ class Navbar extends React.Component {
         return (
             <div className="navbar navbar-expand-sm">
                 <Link className="nav-link" to="/">Home</Link>
-                <Link className="nav-link" to="/About">About</Link>
+                <Link className="nav-link" to="/Tutoring">Tutoring</Link>
             </div>
         );
     }

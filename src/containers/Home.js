@@ -1,5 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import profileImg from '../images/steve-profile.jpg';
+import legoMan from '../images/LegoProgrammer_sm.jpeg';
+import kaylaLearning from '../images/kaylaLearning_sm.jpg';
+import oneOnOne from '../images/OneOnOne.svg';
+import personalizedPlan from '../images/personalized_plan.svg';
+import theoryAndPractice from '../images/theory_practice.svg';
 
 import * as consts from '../utils/constants.js';
 
@@ -68,20 +75,37 @@ class Home extends React.Component {
         } else if (this.state.tutoringState==consts.EXPANDED) {
             chosenContent = (
                 <div className="boxed-background">
-                    <h5 className="text-center">Title description, Dec 7, 2017</h5>
-                    <div className="fakeimg">Fake Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco.</p>
+                    <h3 className="text-center">Apprentice Tutoring by Fordsoft</h3>
                     <br />
-                    <h2>TITLE HEADING</h2>
-                    <h5>Title description, Sep 2, 2017</h5>
-                    <div className="fakeimg">Fake Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco.</p>
+                    <img className="float-left" src={legoMan} width="185" height="200" />
+                    <p>I started Apprentice Tutoring because I like what I do! Software Engineering is my passion.
+                    Working with me, you will be well on your well to software craftsmanship. </p>
+                    <p>Whether you need tutoring for college or high school classes, or you just want to prepare for
+                    college or for joining the work force, I have just the thing for you.</p>
+                    <div className="clearBoth" />
+                    <br />
+                    <div className="inner-content">
+                        <div className="column">
+                            <img src={oneOnOne} width="70" height="70" className="center" />
+                            <h4 className="text-center">One-on-one</h4>
+                            <p className="text-center">You get all my attention, and my teaching adapts to you.</p>
+                        </div>
+                        <div className="column">
+                            <img src={personalizedPlan} width="70" height="70" className="center" />
+                            <h4 className="text-center">Personalized</h4>
+                            <p className="text-center">Help with specific subjects, or build a personalized curriculums for college or industry preperation.</p>
+                        </div>
+                        <div className="column">
+                            <img src={theoryAndPractice} width="90" height="70" className="center" />
+                            <h4 className="text-center">Theory and Practice</h4>
+                            <p className="text-center">We'll go beyond theory and learn how Software Engineering happens in real life.</p>
+                        </div>
+                        
+                    </div>
+                    <div className="clearBoth" />
+                    
+                    <br />
+                    <Link className="nav-link" to="/Tutoring">Learn more...</Link>
                 </div>
             );
         }
