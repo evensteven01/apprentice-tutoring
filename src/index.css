@@ -160,6 +160,49 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     clear: both;
 }
 
+/** Cards **/
+.section-container {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(230,83,143,0.5);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  margin: 20px 40px 20px 40px;
+  padding: 5px;
+  background:rgba(188,143,143,0.5);
+}
+.section-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.section-title {
+    font: 30px Raleway;
+    text-align: left;
+}
+
+
+
+.card-container {
+  padding: 2px 16px;
+  box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 400px;
+  border-radius: 5px; /* 5px rounded corners */
+}
+.card-container.first-level {
+    
+}
+.card-container.second-level {
+    width: 368px;
+}
+.card-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-container img {
+    border-radius: 5px 5px 0 0;
+    width: inherit;
+    margin: -2px -16px;
+}
+
 /**  Footer specific **/
 #footer {
     position: absolute;
@@ -176,4 +219,8 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
 .center {
     display: block;
     margin: 0 auto;
+}
+
+.thumbnail-container {
+    width: 185px;
 }

@@ -47,12 +47,18 @@ class Home extends React.Component {
         if(this.state.aboutMeState==consts.EXPANDED) {
             chosenContent = (
                 <div className="boxed-background">
+                <div className="float-left thumbnail-container">
+                    <img src={profileImg} width="185" height="200" />
+                    <p>
+                    Costume Designer: My beloved 2 year old daughter
+                    </p>
+                </div>
                 <p>Im a Software Engineer with over 10 years of experience in web apps, mobile apps, and TCP/UDP servers.
                     Ive been the sole developer, DB administrator, and linux administrator at a start up as well as started
                     a project leading and managing a team of 7 people. I earned my Masters in Software Engineering. 
-                    But most importantly, Im the proud father of a toddler.
                 </p>
                 
+                <div className="clearBoth" />
                 <hr />
                 <p>Find Apprentice Tutoring on Social Media</p>
                 <ul className="nav nav-pills flex-column">

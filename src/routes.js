@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './containers/Home';
-import About from './containers/About';
+import Tutoring from './containers/Tutoring';
 
 export default class MyRoutes extends React.Component {
     render() {
@@ -11,8 +11,8 @@ export default class MyRoutes extends React.Component {
                 <Route exact path="/" render={() => 
                     <Home id="home" onTogglePageState={this.props.onTogglePageState}/>
                 } />
-                <Route exact path="/about" render={() =>
-                    <About id="about" />
+                <Route exact path="/tutoring" render={() =>
+                    <Tutoring id="tutoring" />
                 } />
             </div>
         );
