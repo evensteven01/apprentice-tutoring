@@ -1,6 +1,7 @@
 import React from 'react';
 
 import theoryAndPractice from '../images/theory_practice.svg';
+import * as consts from '../utils/constants.js';
 
 class Tutoring extends React.Component {
     render() {
@@ -37,6 +38,7 @@ class Tutoring extends React.Component {
         const coursesTutored = {
             title: 'Courses Tutored',
             introduction: 'Courses tutored',
+            subsectionStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Computer Science'},
                 {title: 'Intro to Programming I, II'},
@@ -108,14 +110,23 @@ class Section extends React.Component {
     render() {
         const subSections = this.props.subsections ? this.props.subsections : [];
         const titleClassNames = 'section-title';
-        const subSectionsHtml = subSections.map(function(subSection, index){
-            return <Card {...subSection} />
+        let sectionCardsContainerClasses = 'section-cards';
+        if(this.props.subsectionStyle && this.props.subsectionStyle==consts.CARD_STYLE_STANDARD){
+            sectionCardsContainerClasses += " standard-card";
+        } else if(this.props.subsectionStyle && this.props.subsectionStyle==consts.CARD_STYLE_LIST){
+            sectionCardsContainerClasses += " list-card";
+        }
+
+        const subSectionsHtml = subSections.map((subSection, index) =>{
+            return <Card 
+                    {...subSection}
+                    style={this.props.subsectionStyle ? this.props.subsectionStyle : undefined} />
         });
         return (
             <div className="section-container" >
                 <div className={titleClassNames}>{this.props.title}</div>
                 {this.props.introduction && <p>{this.props.introduction}</p>}
-                {subSections.length>0 ? <div className="section-cards">{subSectionsHtml}</div> : null}
+                {subSections.length>0 ? <div className={sectionCardsContainerClasses}>{subSectionsHtml}</div> : null}
             </div>
         );
     }
@@ -127,21 +138,28 @@ class Card extends React.Component {
     }
     render() {
         const subSections = this.props.subsections ? this.props.subsections : [];
-        let titleClassNames = "card-title ";
-        let containerClassNames = "card-container ";
+        let titleClassNames = "card-title";
+        let containerClassNames = "card-container";
         if(this.props.level==1) {
-            titleClassNames += "first-level";
-            containerClassNames += "first-level";
+            containerClassNames += " first-level";
+            titleClassNames += " first-level";
         } else {
-            titleClassNames += "second-level";
-            containerClassNames += "second-level";
+            containerClassNames += " second-level";
+            titleClassNames += " second-level";
+        }
+
+        if(this.props.style==consts.CARD_STYLE_STANDARD){
+            containerClassNames += " standard-card";
+        } else if(this.props.style==consts.CARD_STYLE_LIST){
+            containerClassNames += " list-card";
         }
 
         const subSectionsHtml = subSections.map((subSection, index) =>{
-            return <Card {...subSection} level={this.props.level+1} />
+            return <Card 
+                    {...subSection} 
+                    level={this.props.level+1}
+                    style={this.props.subsectionStyle ? this.props.subsectionStyle : undefined} />
         })
-        console.log('Subsections:');
-        console.log(subSectionsHtml);
 
         return (
             <div className={containerClassNames} >
@@ -156,7 +174,8 @@ class Card extends React.Component {
 }
 
 Card.defaultProps = {
-    level: 1
+    level: 1,
+    style: consts.CARD_STYLE_STANDARD
 }
 
 class ContactForm extends React.Component {

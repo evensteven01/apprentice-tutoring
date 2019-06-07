@@ -184,9 +184,13 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     align-items: stretch;
     width: 100%;
 }
+.section-cards.list-card {
+    align-content: space-between;
+    justify-content: space-between;
+    padding: 0 0 5px 40px;
+}
 
-
-.card-container {
+.card-container.standard-card {
     display: inline-block;
     padding: 2px 16px;
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
@@ -194,21 +198,27 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     width: 400px;
     border-radius: 5px; /* 5px rounded corners */
 }
-.card-container.first-level {
+.card-container.standard-card.first-level {
     
 }
-.card-container.second-level {
+.card-container.standard-card.second-level {
     width: 368px;
 }
-.card-container:hover {
+.card-container.standard-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.card-container img {
+.card-container.standard-card img {
     border-radius: 5px 5px 0 0;
     width: inherit;
     margin: -2px -16px;
 }
+.card-container.list-card {
+    flex: 1 0 40%;
+    height: 30px;
+    display: list-item;
+}
+
 
 /**  Footer specific **/
 #footer {
