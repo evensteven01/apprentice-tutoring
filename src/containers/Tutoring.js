@@ -8,6 +8,8 @@ class Tutoring extends React.Component {
         const servicesOffered = {
             title: 'Services Offered',
             introduction: 'I offer several different services to fit your needs.',
+            containerStyle: consts.CONTAINER_STYLE_ROWS,
+            cardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {
                     title: 'Traditional Tutoring',
@@ -38,7 +40,7 @@ class Tutoring extends React.Component {
         const coursesTutored = {
             title: 'Courses Tutored',
             introduction: 'Courses tutored',
-            subsectionStyle: consts.CARD_STYLE_LIST,
+            cardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Computer Science'},
                 {title: 'Intro to Programming I, II'},
@@ -58,6 +60,7 @@ class Tutoring extends React.Component {
         const subjectsOffered = {
             title: 'Other Subjects Offered',
             introduction: '',
+            cardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Distributed Systems'},
                 {title: 'Intro to Cloud Computing'},
@@ -74,6 +77,7 @@ class Tutoring extends React.Component {
         };
         const pricing = {
             title: 'Pricing',
+            cardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {introduction: 'Hourly Rate: $60 in-person, $55 online'},
                 {introduction: 'Rate Details: Discount for referrals. Discounted group lessons: 2 people $40/hour each, 3 people $30/hour each.'},
@@ -91,15 +95,6 @@ class Tutoring extends React.Component {
                     <Section 
                         {...pricing} />
                     <ContactForm />
-                    <hr />
-                    <hr />
-                    <hr />
-                    <h2>Services Offered</h2>
-                    <Card title="Traditional Tutoring" />
-                    <Card title="Personalized Curriculum" />
-                        <h4>College Preperation</h4>
-                        <h4>Career Preperation</h4>
-                        <h4>Full Curriculum</h4>
                 </div>
             </div>
         );
@@ -109,27 +104,33 @@ class Tutoring extends React.Component {
 class Section extends React.Component {
     render() {
         const subSections = this.props.subsections ? this.props.subsections : [];
+        const containerClassNames = 'section-container ' + this.props.containerStyle;
         const titleClassNames = 'section-title';
         let sectionCardsContainerClasses = 'section-cards';
-        if(this.props.subsectionStyle && this.props.subsectionStyle==consts.CARD_STYLE_STANDARD){
+        if(this.props.cardStyle && this.props.cardStyle==consts.CARD_STYLE_STANDARD){
             sectionCardsContainerClasses += " standard-card";
-        } else if(this.props.subsectionStyle && this.props.subsectionStyle==consts.CARD_STYLE_LIST){
+        } else if(this.props.cardStyle && this.props.cardStyle==consts.CARD_STYLE_LIST){
             sectionCardsContainerClasses += " list-card";
         }
 
         const subSectionsHtml = subSections.map((subSection, index) =>{
             return <Card 
                     {...subSection}
-                    style={this.props.subsectionStyle ? this.props.subsectionStyle : undefined} />
+                    cardStyle={this.props.cardStyle ? this.props.cardStyle : undefined} />
         });
         return (
-            <div className="section-container" >
+            <div className={containerClassNames} >
                 <div className={titleClassNames}>{this.props.title}</div>
                 {this.props.introduction && <p>{this.props.introduction}</p>}
                 {subSections.length>0 ? <div className={sectionCardsContainerClasses}>{subSectionsHtml}</div> : null}
             </div>
         );
     }
+}
+
+Section.defaultProps = {
+    cardStyle: consts.CARD_STYLE_STANDARD,
+    containerStyle: consts.CONTAINER_STYLE_COLUMNS
 }
 
 class Card extends React.Component {
@@ -148,9 +149,9 @@ class Card extends React.Component {
             titleClassNames += " second-level";
         }
 
-        if(this.props.style==consts.CARD_STYLE_STANDARD){
+        if(this.props.cardStyle==consts.CARD_STYLE_STANDARD){
             containerClassNames += " standard-card";
-        } else if(this.props.style==consts.CARD_STYLE_LIST){
+        } else if(this.props.cardStyle==consts.CARD_STYLE_LIST){
             containerClassNames += " list-card";
         }
 
@@ -158,7 +159,7 @@ class Card extends React.Component {
             return <Card 
                     {...subSection} 
                     level={this.props.level+1}
-                    style={this.props.subsectionStyle ? this.props.subsectionStyle : undefined} />
+                    cardStyle={this.props.cardStyle ? this.props.cardStyle : undefined} />
         })
 
         return (
@@ -175,12 +176,31 @@ class Card extends React.Component {
 
 Card.defaultProps = {
     level: 1,
-    style: consts.CARD_STYLE_STANDARD
+    cardStyle: consts.CARD_STYLE_STANDARD,
+    containerStyle: consts.CONTAINER_STYLE_COLUMNS
 }
 
 class ContactForm extends React.Component {
     render() {
-        return ( <div >Contact Form</div> );
+        return (
+            <div className="container">
+                <form >
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name.." />
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                    </select>
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style={{height:'200px'}}></textarea>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+         );
     }
 }
 
