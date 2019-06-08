@@ -9,7 +9,7 @@ class Tutoring extends React.Component {
             title: 'Services Offered',
             introduction: 'I offer several different services to fit your needs.',
             containerStyle: consts.CONTAINER_STYLE_ROWS,
-            cardStyle: consts.CARD_STYLE_LIST,
+            childCardStyle: consts.CARD_STYLE_STANDARD,
             subsections: [
                 {
                     title: 'Traditional Tutoring',
@@ -20,6 +20,7 @@ class Tutoring extends React.Component {
                     title: 'Personalized Curriculum',
                     introduction: 'Let\'s come up with a set of subjects to cover to accomplish your learning and professional goals.',
                     image: theoryAndPractice,
+                    containerStyle: consts.CONTAINER_STYLE_COLUMNS,
                     subsections: [
                         {
                             title: 'College Preperation',
@@ -40,7 +41,7 @@ class Tutoring extends React.Component {
         const coursesTutored = {
             title: 'Courses Tutored',
             introduction: 'Courses tutored',
-            cardStyle: consts.CARD_STYLE_LIST,
+            childCardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Computer Science'},
                 {title: 'Intro to Programming I, II'},
@@ -60,14 +61,14 @@ class Tutoring extends React.Component {
         const subjectsOffered = {
             title: 'Other Subjects Offered',
             introduction: '',
-            cardStyle: consts.CARD_STYLE_LIST,
+            childCardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Distributed Systems'},
                 {title: 'Intro to Cloud Computing'},
                 {title: 'Intro Functional Programming '},
                 {title: 'Web Technologies'},
 
-                {title: 'Software Development Process (Fundamentals of SE book)'},
+                {title: 'Software Development Process'},
                 {title: 'Technical Resumes'},
                 {title: 'Technical Interviews'},
                 {title: 'Scrum'},
@@ -104,23 +105,17 @@ class Tutoring extends React.Component {
 class Section extends React.Component {
     render() {
         const subSections = this.props.subsections ? this.props.subsections : [];
-        const containerClassNames = 'section-container ' + this.props.containerStyle;
-        const titleClassNames = 'section-title';
-        let sectionCardsContainerClasses = 'section-cards';
-        if(this.props.cardStyle && this.props.cardStyle==consts.CARD_STYLE_STANDARD){
-            sectionCardsContainerClasses += " standard-card";
-        } else if(this.props.cardStyle && this.props.cardStyle==consts.CARD_STYLE_LIST){
-            sectionCardsContainerClasses += " list-card";
-        }
+        const containerClassNames = 'section-container';
+        let sectionCardsContainerClasses = 'section-cards ' + this.props.containerStyle; //Row or column
 
         const subSectionsHtml = subSections.map((subSection, index) =>{
             return <Card 
                     {...subSection}
-                    cardStyle={this.props.cardStyle ? this.props.cardStyle : undefined} />
+                    cardStyle={this.props.childCardStyle ? this.props.childCardStyle : undefined} /> //List or standard(card)
         });
         return (
             <div className={containerClassNames} >
-                <div className={titleClassNames}>{this.props.title}</div>
+                <div className='title'>{this.props.title}</div>
                 {this.props.introduction && <p>{this.props.introduction}</p>}
                 {subSections.length>0 ? <div className={sectionCardsContainerClasses}>{subSectionsHtml}</div> : null}
             </div>
@@ -129,7 +124,7 @@ class Section extends React.Component {
 }
 
 Section.defaultProps = {
-    cardStyle: consts.CARD_STYLE_STANDARD,
+    childCardStyle: consts.CARD_STYLE_STANDARD,
     containerStyle: consts.CONTAINER_STYLE_COLUMNS
 }
 
@@ -139,36 +134,29 @@ class Card extends React.Component {
     }
     render() {
         const subSections = this.props.subsections ? this.props.subsections : [];
-        let titleClassNames = "card-title";
-        let containerClassNames = "card-container";
+        let containerClassNames = "card-container " + this.props.cardStyle;
         if(this.props.level==1) {
             containerClassNames += " first-level";
-            titleClassNames += " first-level";
         } else {
             containerClassNames += " second-level";
-            titleClassNames += " second-level";
         }
 
-        if(this.props.cardStyle==consts.CARD_STYLE_STANDARD){
-            containerClassNames += " standard-card";
-        } else if(this.props.cardStyle==consts.CARD_STYLE_LIST){
-            containerClassNames += " list-card";
-        }
+        let cardCardsContainerClasses = 'card-cards ' + this.props.containerStyle; //Row or column
 
         const subSectionsHtml = subSections.map((subSection, index) =>{
             return <Card 
                     {...subSection} 
                     level={this.props.level+1}
-                    cardStyle={this.props.cardStyle ? this.props.cardStyle : undefined} />
+                    cardStyle={this.props.childCardStyle ? this.props.childCardStyle : undefined} /> //List or standard
         })
 
         return (
             <div className={containerClassNames} >
                 {this.props.image && <img src={this.props.image} />}
-                <p className={titleClassNames}>{this.props.title}</p>
+                <p className="title">{this.props.title}</p>
                 {this.props.introduction && <p>{this.props.introduction}</p>}
                 
-                {subSections.length>0 ? <div className="">{subSectionsHtml}</div> : null}
+                {subSections.length>0 ? <div className={cardCardsContainerClasses}>{subSectionsHtml}</div> : null}
             </div>
         );
     }
@@ -177,6 +165,7 @@ class Card extends React.Component {
 Card.defaultProps = {
     level: 1,
     cardStyle: consts.CARD_STYLE_STANDARD,
+    childCardStyle: consts.CARD_STYLE_STANDARD,
     containerStyle: consts.CONTAINER_STYLE_COLUMNS
 }
 

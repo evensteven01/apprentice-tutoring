@@ -162,10 +162,78 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
 
 /** Cards **/
 .section-container {
-  /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(230,83,143,0.5);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 20px 40px 20px 40px;
+    padding: 5px;
+    background:rgba(188,143,143,0.5);
+}
+.section-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.section-container .title {
+    font: 30px Raleway;
+    text-align: left;
+}
+.section-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 100%;
+}
+.card-cards {
+    display: flex;
+}
+
+.row-container {
+    align-content: space-between;
+    justify-content: space-between;
+    padding: 0 0 5px 40px;
+}
+.column-container {
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-around;
+    align-items: stretch;
+}
+.column-container .standard-card {
+    flex: 1 0 40%;
+    
+    max-width: 40%;
+}
+.column-container .list-card {
+    
+    flex: 1 0 40%;
+    margin: auto auto auto 40px;
+}
+.standard-card {
+    display: inline-block;
+    padding: 2px 16px;
+    box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+.list-card {
+    #height: 30px;
+    display: list-item;
+}
+.first-level img {
+    width: 400px;
+}
+.second-level img {
+    width: 368px;
+}
+
+
+/**
+.section-container {
   box-shadow: 0 4px 8px 0 rgba(230,83,143,0.5);
   transition: 0.3s;
-  border-radius: 5px; /* 5px rounded corners */
+  border-radius: 5px;
   margin: 20px 40px 20px 40px;
   padding: 5px;
   background:rgba(188,143,143,0.5);
@@ -173,7 +241,8 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
 .section-container:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-.section-title {
+
+.section-container .title {
     font: 30px Raleway;
     text-align: left;
 }
@@ -196,7 +265,7 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 400px;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
 }
 .row-container .card-container {
     width: 100%;
@@ -222,7 +291,7 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     #height: 30px;
     display: list-item;
 }
-
+**/
 
 /**  Footer specific **/
 #footer {
