@@ -1,6 +1,7 @@
 import React from 'react';
 
 import theoryAndPractice from '../images/theory_practice.svg';
+import underConstruction from '../images/UnderConstruction.svg';
 import * as consts from '../utils/constants.js';
 
 class Tutoring extends React.Component {
@@ -14,25 +15,28 @@ class Tutoring extends React.Component {
                 {
                     title: 'Traditional Tutoring',
                     introduction: 'We’ll cover the specific material and subject and you specify. I’ll show you how its connected to the big picture of Computer Science and the Software Engineering Industry.',
-                    image: theoryAndPractice
+                    image: underConstruction
                 },
                 {
                     title: 'Personalized Curriculum',
                     introduction: 'Let\'s come up with a set of subjects to cover to accomplish your learning and professional goals.',
-                    image: theoryAndPractice,
+                    image: underConstruction,
                     containerStyle: consts.CONTAINER_STYLE_COLUMNS,
                     subsections: [
                         {
                             title: 'College Preperation',
-                            introduction: 'Get an edge over your classmates and jumpstart your higher education pursues by learning the material beforehand. We can even personalize it to your specfic school’s curriculum.'
+                            introduction: 'Get an edge over your classmates and jumpstart your higher education pursues by learning the material beforehand. We can even personalize it to your specfic school’s curriculum.',
+                            image: underConstruction
                         },
                         {
                             title: 'Career Preparation',
-                            introduction: 'Are you almost ready to start your career, but want to prepare for success? Lets design a curriculum to prepare you for the real world.'
+                            introduction: 'Are you almost ready to start your career, but want to prepare for success? Lets design a curriculum to prepare you for the real world.',
+                            image: underConstruction
                         },
                         {
                             title: 'Full Curriculum',
-                            introduction: 'Lets cover all the subjects necessary for becoming a Software Engineer, without having to go thousands of dollars in to debt.'
+                            introduction: 'Lets cover all the subjects necessary for becoming a Software Engineer, without having to go thousands of dollars in to debt.',
+                            image: underConstruction
                         }
                     ]
                 }
@@ -170,24 +174,39 @@ Card.defaultProps = {
 }
 
 class ContactForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showMenu: false
+        }
+        this.chooseHandler = this.chooseHandler.bind(this);
+    }
+    chooseHandler() {
+        console.log('RUFF!');
+        this.setState({showMenu: true});
+    }
     render() {
+        const display = true;
         return (
-            <div className="container">
-                <form >
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Your name.." />
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
-                    <label for="country">Country</label>
-                    <select id="country" name="country">
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                        <option value="usa">USA</option>
-                    </select>
-                    <label for="subject">Subject</label>
-                    <textarea id="subject" name="subject" placeholder="Write something.." style={{height:'200px'}}></textarea>
-                    <input type="submit" value="Submit" />
-                </form>
+            <div>
+            <div className="form-container">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name.." />
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+                <label for="subject">Subject</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style={{height:'200px'}}></textarea>
+                <button onClick={this.chooseHandler}>Send Via...</button>
+                {this.state.showMenu && <div>
+                    <button>Email Client</button>
+                    <button>GMail Web Client</button></div>}
+            </div>
             </div>
          );
     }
