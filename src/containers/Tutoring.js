@@ -177,35 +177,92 @@ class ContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMenu: false
+            firstName: '',
+            lastName: '',
+            phone: '',
+            address: '',
+            helpNeeded: '',
+            helpWantedDescription: '',
         }
-        this.chooseHandler = this.chooseHandler.bind(this);
+        this.sendHandler = this.sendHandler.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
-    chooseHandler() {
-        console.log('RUFF!');
-        this.setState({showMenu: true});
+    sendHandler(sendOption) {
+        const toMe = 'tutoring@swcraftsman.com'
+        console.log('Send via: ' + sendOption);
+        const serviceNeeded = consts.serviceKey[this.state.helpNeeded];
+        const subject = 'Apprentice Tutoring: ' + serviceNeeded;
+        const address = this.state.address ? 'My address is ' + this.state.address + '.' : '';
+        let body_message = 'Dear Steven Ford,\r\n\r\n' +
+            'My name is ' + this.state.firstName + ' ' + this.state.lastName + '. ' +
+            'I am interested in tutoring and/or mentorship from you, and would like to ' +
+            'learn more about your ' + serviceNeeded + ' services. \r\n \r\n' +
+            'My specific needs are: \r\n' + this.state.helpWantedDescription + '\r\n\r\n' +
+            'You can contact me at ' + this.state.phone + '\r\n\r\n' +
+            'Thank you,\r\n\r\n' + this.state.firstName + ' ' + this.state.lastName;
+        body_message = encodeURIComponent(body_message)
+
+        let mailto_link = '';
+        if(sendOption==='emailClient'){
+            mailto_link = 'mailto:' + toMe + '?subject=' + subject + '&body=' + body_message;
+        } else if(sendOption==='gmailClient'){
+            mailto_link = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + toMe + '&su=' + subject +
+                '&body=' + body_message;
+        }
+        
+
+
+        const win = window.open(mailto_link, 'emailWindow');
+        
+    }
+    onChange(event) {
+        const field = event.target.id;
+        if(field === 'fname'){
+            this.setState({firstName: event.target.value})
+        } else if(field==='lname') {
+            this.setState({lastName: event.target.value})
+        } else if(field==='phone') {
+            this.setState({phone: event.target.value})
+        } else if(field==='address') {
+            this.setState({address: event.target.value})
+        } else if(field==='helpNeeded') {
+            this.setState({helpNeeded: event.target.value})
+        } else if(field==='helpWantedDescription') {
+            this.setState({helpWantedDescription: event.target.value})
+        }
     }
     render() {
-        const display = true;
         return (
             <div>
             <div className="form-container">
                 <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name.." />
+                <input type="text" id="fname" name="firstname" placeholder="Your name.." value={this.state.firstName} onChange={this.onChange} />
                 <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
-                <label for="country">Country</label>
-                <select id="country" name="country">
-                    <option value="australia">Australia</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name.." value={this.state.lastName} onChange={this.onChange} />
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="Your phone number.." value={this.state.phone} onChange={this.onChange} />
+                <label for="address">Address</label>
+                <textarea id="address" name="address" placeholder="Where do you live?" style={{height:'50px'}}
+                     value={this.state.address} onChange={this.onChange}></textarea>
+                <label for="helpNeeded">How do you need help?</label>
+                <select id="helpNeeded" name="helpNeeded"  value={this.state.helpNeeded} onChange={this.onChange}>
+                    <option value="tutoring">Traditional Tutoring</option>
+                    <option value="collegePrep">College Preperation</option>
+                    <option value="careerPrep">Career Preperation</option>
+                    <option value="fullCurriculum">Full Curriculum</option>
+                    <option value="other">Other</option>
                 </select>
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style={{height:'200px'}}></textarea>
-                <button onClick={this.chooseHandler}>Send Via...</button>
-                {this.state.showMenu && <div>
-                    <button>Email Client</button>
-                    <button>GMail Web Client</button></div>}
+                <label for="helpWantedDescription">Tutoring Detailss</label>
+                <textarea id="helpWantedDescription" name="helpWantedDescription" 
+                    placeholder="Describe what you hope to get out of tutoring..." style={{height:'120px'}}
+                    value={this.state.helpWantedDescription} onChange={this.onChange}></textarea>
+                <div class="dropdown">
+                    <button class="dropbtn">Submit Via</button>
+                    <div class="dropdown-content">
+                        <a onClick={() => this.sendHandler('emailClient')}>Email Client</a>
+                        <a onClick={() => this.sendHandler('gmailClient')}>GMail Web Client</a>
+                    </div>
+                </div>
             </div>
             </div>
          );
