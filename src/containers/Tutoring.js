@@ -85,7 +85,7 @@ class Tutoring extends React.Component {
             cardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {introduction: 'Hourly Rate: $60 in-person, $55 online'},
-                {introduction: 'Rate Details: Discount for referrals. Discounted group lessons: 2 people $40/hour each, 3 people $30/hour each.'},
+                {introduction: 'Rate Details: Discount for referrals. Discounted group lessons: 2 people $45/hour each, 3 people $35/hour each.'},
             ],
         };
         return (
