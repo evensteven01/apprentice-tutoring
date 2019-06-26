@@ -2,6 +2,8 @@ import React from 'react';
 
 import theoryAndPractice from '../images/theory_practice.svg';
 import underConstruction from '../images/UnderConstruction.svg';
+import personalizedPlan from '../images/personalized_plan.svg';
+import oneOnOne from '../images/pair_programming_sm.jpeg';
 import * as consts from '../utils/constants.js';
 
 class Tutoring extends React.Component {
@@ -14,13 +16,13 @@ class Tutoring extends React.Component {
             subsections: [
                 {
                     title: 'Traditional Tutoring',
-                    introduction: 'We’ll cover the specific material and subject and you specify. I’ll show you how its connected to the big picture of Computer Science and the Software Engineering Industry.',
-                    image: underConstruction
+                    introduction: 'We’ll cover the specific material and subject as you specify. I’ll show you how its connected to the big picture of Computer Science and the Software Engineering Industry.',
+                    image: oneOnOne
                 },
                 {
                     title: 'Personalized Curriculum',
                     introduction: 'Let\'s come up with a set of subjects to cover to accomplish your learning and professional goals.',
-                    image: underConstruction,
+                    image: personalizedPlan,
                     containerStyle: consts.CONTAINER_STYLE_COLUMNS,
                     subsections: [
                         {
@@ -44,7 +46,7 @@ class Tutoring extends React.Component {
         };
         const coursesTutored = {
             title: 'Courses Tutored',
-            introduction: 'Courses tutored',
+            introduction: "If you need help with some of your courses, I'll work with you to not only improve your grade, but ensure that you understand the course and how it fits in to your degree.",
             childCardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Computer Science'},
@@ -64,7 +66,7 @@ class Tutoring extends React.Component {
         };
         const subjectsOffered = {
             title: 'Other Subjects Offered',
-            introduction: '',
+            introduction: "In addition to the above college courses, we can also go over a few important topics that will put you ahead of your colleagues when starting your career.",
             childCardStyle: consts.CARD_STYLE_LIST,
             subsections: [
                 {title: 'Intro to Distributed Systems'},

@@ -215,6 +215,7 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
+    margin: 20px auto auto auto;
 }
 .list-card {
     #height: 30px;
@@ -222,6 +223,9 @@ div.pullRightLeft a:hover:before, div.pullRightLeft a:hover:after
 }
 .first-level img {
     width: 400px;
+}
+.list-card.first-level p {
+    font-size: 1.3rem;
 }
 .second-level img {
     width: 368px;
