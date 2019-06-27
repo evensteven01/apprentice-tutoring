@@ -120,7 +120,7 @@ class Home extends React.Component {
                 <div className="container" style={{marginTop:'30px'}}>
                     <div className="row animated-nav-bar pullRightLeft">
                         <a className="text-center" onClick={()=> (this.togglePageState('aboutMe'))}>About Me</a>
-                        <a className="text-center" onClick={()=> (this.togglePageState('tutoring'))}>Tutoring</a>
+                        <a className="text-center" onClick={()=> (this.togglePageState('tutoring'))}>About Apprentice Tutoring</a>
                     </div>
                     <br />
                     <div class="main-content">

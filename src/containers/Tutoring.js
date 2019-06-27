@@ -4,6 +4,9 @@ import theoryAndPractice from '../images/theory_practice.svg';
 import underConstruction from '../images/UnderConstruction.svg';
 import personalizedPlan from '../images/personalized_plan.svg';
 import oneOnOne from '../images/pair_programming_sm.jpeg';
+import careerPrep from '../images/career_prep.png';
+import collegePrep from '../images/collegePrep.jpg';
+import curriculum from '../images/curriculum.jpg';
 import * as consts from '../utils/constants.js';
 
 class Tutoring extends React.Component {
@@ -28,17 +31,17 @@ class Tutoring extends React.Component {
                         {
                             title: 'College Preperation',
                             introduction: 'Get an edge over your classmates and jumpstart your higher education pursues by learning the material beforehand. We can even personalize it to your specfic school’s curriculum.',
-                            image: underConstruction
+                            image: collegePrep
                         },
                         {
                             title: 'Career Preparation',
                             introduction: 'Are you almost ready to start your career, but want to prepare for success? Lets design a curriculum to prepare you for the real world.',
-                            image: underConstruction
+                            image: careerPrep
                         },
                         {
                             title: 'Full Curriculum',
                             introduction: 'Lets cover all the subjects necessary for becoming a Software Engineer, without having to go thousands of dollars in to debt.',
-                            image: underConstruction
+                            image: curriculum
                         }
                     ]
                 }
